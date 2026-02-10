@@ -21,6 +21,7 @@ const getShopById = async (req, res) => {
 
 const createShop = async (req, res) => {
   try {
+    req.body.user = req.user._id;
     const createdShop = await Shop.create(req.body);
     if (!createdShop)
       res.status(400).json({ message: "Issue creating product" });
