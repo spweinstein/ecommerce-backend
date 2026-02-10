@@ -23,27 +23,27 @@ const shopSchema = new mongoose.Schema({
   // }
 });
 
-const industrySchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-});
+// const industrySchema = new mongoose.Schema({
+//   name: {
+//     type: String,
+//     required: true,
+//   },
+// });
 
-const Industry = mongoose.model("Industry", industrySchema);
+// // const Industry = mongoose.model("Industry", industrySchema);
 
-const productCategorySchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
+// const productCategorySchema = new mongoose.Schema({
+//   name: {
+//     type: String,
+//     required: true,
+//   },
 
-  industry: {
-    ref: "Industry",
-    required: true,
-  },
-});
+//   industry: {
+//     ref: "Industry",
+//     required: true,
+//   },
+// });
 
-const ProductCategory = mongoose.model("Industry", industrySchema);
+// const ProductCategory = mongoose.model("Industry", industrySchema);
 
 export default mongoose.model("Shop", shopSchema);
