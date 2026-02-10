@@ -2,7 +2,12 @@ import Product from "../models/product.js";
 
 const getProducts = async (req, res) => {
   try {
-    const products = await Product.find().populate("shop"); //.populate("category")
+    const query = {};
+    if (req.query?.shopId) {
+      query.shop = req.query.shopId;
+    }
+    // console.log(query);
+    const products = await Product.find(query).populate("shop"); //.populate("category")
     return res.status(200).json(products);
   } catch (error) {
     return res.status(500).json({ message: error.message });
