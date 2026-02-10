@@ -1,5 +1,14 @@
 import mongoose from "mongoose";
 
+const addressSchema = new mongoose.Schema({
+  address1: String,
+  address2: String,
+  city: String,
+  region: String,
+  postalCode: String,
+  country: String,
+});
+
 const shopSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -15,6 +24,10 @@ const shopSchema = new mongoose.Schema({
   description: {
     type: String,
     required: true,
+  },
+
+  address: {
+    type: addressSchema,
   },
 
   // industry: {
