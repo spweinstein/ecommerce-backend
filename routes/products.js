@@ -5,12 +5,8 @@ import * as productControllers from "../controllers/productControllers.js";
 const productsRouter = Router();
 
 // GET /products/
-productsRouter.get("/", verifyToken, productControllers.getProducts);
-productsRouter.get(
-  "/:productId",
-  verifyToken,
-  productControllers.getProductById,
-);
+productsRouter.get("/", productControllers.getProducts);
+productsRouter.get("/:productId", productControllers.getProductById);
 productsRouter.post("/", verifyToken, productControllers.createProduct);
 productsRouter.put(
   "/:productId",

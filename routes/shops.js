@@ -5,8 +5,8 @@ import * as shopControllers from "../controllers/shopControllers.js";
 const shopsRouter = Router();
 
 // GET /shops/
-shopsRouter.get("/", verifyToken, shopControllers.getShops);
-shopsRouter.get("/:shopId", verifyToken, shopControllers.getShopById);
+shopsRouter.get("/", shopControllers.getShops);
+shopsRouter.get("/:shopId", shopControllers.getShopById);
 shopsRouter.post("/", verifyToken, shopControllers.createShop);
 shopsRouter.put("/:shopId", verifyToken, shopControllers.updateShop);
 shopsRouter.delete("/:shopId", verifyToken, shopControllers.deleteShop);
