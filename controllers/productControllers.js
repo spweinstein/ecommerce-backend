@@ -23,6 +23,7 @@ const getProductById = async (req, res) => {
 
 const createProduct = async (req, res) => {
   try {
+    req.body.user = req.user._id;
     const newProduct = new Product(req.body);
     const savedProduct = await newProduct.save();
     res.status(201).json(savedProduct);
