@@ -27,28 +27,24 @@ const productSchema = new mongoose.Schema({
   },
   weight: {
     type: Number,
-    required: true,
   },
   length: {
     type: Number,
-    required: true,
   },
   width: {
     type: Number,
-    required: true,
   },
   height: {
     type: Number,
-    required: true,
   },
-  category: {
-    ref: "ProductCategory",
-    required: true,
-  },
-  shop: {
-    ref: "Shop",
-    required: true,
-  },
+  //   category: {
+  //     ref: "ProductCategory",
+  //     required: true,
+  //   },
+  //   shop: {
+  //     ref: "Shop",
+  //     required: true,
+  //   },
 });
 
 export default mongoose.model("Product", productSchema);
