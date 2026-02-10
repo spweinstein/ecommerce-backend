@@ -23,7 +23,6 @@ const productSchema = new mongoose.Schema({
   },
   imgURL: {
     type: String,
-    required: true,
   },
   weight: {
     type: Number,
@@ -41,10 +40,11 @@ const productSchema = new mongoose.Schema({
   //     ref: "ProductCategory",
   //     required: true,
   //   },
-  //   shop: {
-  //     ref: "Shop",
-  //     required: true,
-  //   },
+  shop: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Shop",
+    // required: true,
+  },
 });
 
 export default mongoose.model("Product", productSchema);
