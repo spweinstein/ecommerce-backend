@@ -12,7 +12,15 @@ productsRouter.get(
   productControllers.getProductById,
 );
 productsRouter.post("/", verifyToken, productControllers.createProduct);
-productsRouter.put("/:id", verifyToken, productControllers.updateProduct);
-productsRouter.delete("/:id", verifyToken, productControllers.deleteProduct);
+productsRouter.put(
+  "/:productId",
+  verifyToken,
+  productControllers.updateProduct,
+);
+productsRouter.delete(
+  "/:productId",
+  verifyToken,
+  productControllers.deleteProduct,
+);
 
 export default productsRouter;
