@@ -5,6 +5,7 @@ const industrySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  description: String,
 });
 
 export default mongoose.model("Industry", industrySchema);

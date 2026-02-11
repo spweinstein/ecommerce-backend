@@ -30,9 +30,10 @@ const shopSchema = new mongoose.Schema({
     type: addressSchema,
   },
 
-  // industry: {
-  //     ref: "Industry",
-  //     required: true
-  // }
+  industry: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Industry",
+    required: true,
+  },
 });
 export default mongoose.model("Shop", shopSchema);
