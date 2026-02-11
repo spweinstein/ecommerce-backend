@@ -11,7 +11,7 @@ const getShops = async (req, res) => {
 
 const getShopById = async (req, res) => {
   try {
-    const shop = await Shop.findById(req.params.shopId);
+    const shop = await Shop.findById(req.params.shopId).populate("industry");
     if (!shop) return res.status(404).json({ message: "Shop not found" });
     return res.status(200).json(shop);
   } catch (error) {
