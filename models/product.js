@@ -36,10 +36,11 @@ const productSchema = new mongoose.Schema({
   height: {
     type: Number,
   },
-  //   category: {
-  //     ref: "ProductCategory",
-  //     required: true,
-  //   },
+  category: {
+    ref: "ProductCategory",
+    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+  },
   shop: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Shop",
