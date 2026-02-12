@@ -2,7 +2,9 @@ import Shop from "../models/shop.js";
 
 const getShops = async (req, res) => {
   try {
-    const shops = await Shop.find({}).populate("industry");
+    const query = {};
+    if (req.query.industry) query.industry = req.query.industry;
+    const shops = await Shop.find(query).populate("industry");
     return res.status(200).json(shops);
   } catch (error) {
     return res.status(500).json({ error: error.message });
