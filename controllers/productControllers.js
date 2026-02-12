@@ -6,7 +6,10 @@ const getProducts = async (req, res) => {
     if (req.query?.shopId) {
       query.shop = req.query.shopId;
     }
-    // console.log(query);
+    if (req.query?.productCategoryId) {
+      query.category = req.query.productCategoryId;
+    }
+    console.log(query);
     const products = await Product.find(query).populate("shop"); //.populate("category")
     return res.status(200).json(products);
   } catch (error) {
