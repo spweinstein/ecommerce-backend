@@ -1,4 +1,5 @@
 import Product from "../models/product.js";
+import Shop from "../models/shop.js";
 
 const getProducts = async (req, res) => {
   try {
@@ -9,8 +10,20 @@ const getProducts = async (req, res) => {
     if (req.query?.productCategoryId) {
       query.category = req.query.productCategoryId;
     }
+    if (req.query?.industryId) {
+      const shops = await Shop.find({ industry: req.query.industryId }).select(
+        "_id",
+      );
+      query.shop = { $in: shops.map((shop) => shop._id) };
+    }
+    if (req.query?.search) {
+      query.$or = [
+        { name: { $regex: req.query.search, $options: "i" } },
+        { description: { $regex: req.query.search, $options: "i" } },
+      ];
+    }
     console.log(query);
-    const products = await Product.find(query).populate("shop"); //.populate("category")
+    const products = await Product.find(query).populate("shop", "name"); //.populate("category")
     return res.status(200).json(products);
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -20,8 +33,8 @@ const getProducts = async (req, res) => {
 const getProductById = async (req, res) => {
   try {
     const product = await Product.findById(req.params.productId)
-      .populate("category")
-      .populate("shop");
+      .populate("category", "name")
+      .populate("shop", "name");
     if (!product) return res.status(404).json({ message: "Product not found" });
     return res.status(200).json(product);
   } catch (error) {
