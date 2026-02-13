@@ -11,7 +11,7 @@ export const getCart = async (req, res) => {
   }
 };
 
-export const addToCart = async (req, res) => {
+export const addOneToCart = async (req, res) => {
   try {
     const cart =
       (await Cart.findOne({ user: req.user._id })) ||
@@ -36,7 +36,7 @@ export const addToCart = async (req, res) => {
   }
 };
 
-export const removeFromCart = async (req, res) => {
+export const removeOneFromCart = async (req, res) => {
   try {
     const cart =
       (await Cart.findOne({ user: req.user._id })) ||
@@ -44,10 +44,26 @@ export const removeFromCart = async (req, res) => {
     const cartItem = cart.items.find((item) =>
       item.product.equals(req.params.productId),
     );
-    console.log(cartItem);
     if (cartItem) {
       cartItem.quantity -= 1;
+      if (cartItem.quantity === 0) cart.items.pull(cartItem._id);
     }
+    await cart.save();
+    // console.log(cartItem);
+    return res.status(200).json(cart);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+export const clearItemFromCart = async (req, res) => {
+  try {
+    const cart =
+      (await Cart.findOne({ user: req.user._id })) ||
+      (await Cart.create({ user: req.user._id }));
+    cart.items = cart.items.filter(
+      (item) => !item.product.equals(req.params.productId),
+    );
     await cart.save();
     // console.log(cartItem);
     return res.status(200).json(cart);
