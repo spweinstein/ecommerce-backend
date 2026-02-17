@@ -100,6 +100,8 @@ const checkoutPreview = async (userId, shippingSelections = {}) => {
 
     const shop = shopsMap.get(shopId);
 
+    const taxTotal = TAX_RATE * (shopData.subtotal + shippingCost);
+
     preview.data.shops.push({
       shopId,
       shop: shop
@@ -113,8 +115,8 @@ const checkoutPreview = async (userId, shippingSelections = {}) => {
       items: shopData.items,
       subtotal: shopData.subtotal,
       shippingTotal: shippingCost,
-      taxTotal: TAX_RATE * (shopData.subtotal + shippingCost),
-      grandTotal: shopData.subtotal + shippingCost,
+      taxTotal: taxTotal,
+      grandTotal: shopData.subtotal + shippingCost + taxTotal,
       shippingSpeed: SHIPPING_OPTIONS[shippingMethod].speed,
       shippingLabel: SHIPPING_OPTIONS[shippingMethod].label,
     });
