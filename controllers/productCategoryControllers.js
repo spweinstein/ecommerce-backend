@@ -16,7 +16,7 @@ export const getProductCategoriesByIndustry = async (req, res) => {
 export const createProductCategory = async (req, res) => {
   try {
     const createdProductCategory = await ProductCategory.create(req.body);
-    return res.status(200).json(createdProductCategory);
+    return res.status(201).json(createdProductCategory);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
