@@ -4,17 +4,17 @@ import Shop from "../models/shop.js";
 const getProducts = async (req, res) => {
   try {
     const query = {};
-    if (req.query?.shopId) {
-      query.shop = req.query.shopId;
-    }
-    if (req.query?.productCategoryId) {
-      query.category = req.query.productCategoryId;
-    }
     if (req.query?.industryId) {
       const shops = await Shop.find({ industry: req.query.industryId }).select(
         "_id",
       );
       query.shop = { $in: shops.map((shop) => shop._id) };
+    }
+    if (req.query?.shopId) {
+      query.shop = req.query.shopId;
+    }
+    if (req.query?.productCategoryId) {
+      query.category = req.query.productCategoryId;
     }
     if (req.query?.search) {
       query.$or = [
