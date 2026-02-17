@@ -3,8 +3,12 @@ import Cart from "../models/cart.js";
 export const getCart = async (req, res) => {
   try {
     const cart =
-      (await Cart.findOne({ user: req.user._id }).populate("items.product")) ||
-      (await Cart.create({ user: req.user._id }));
+      (await Cart.findOne({ user: req.user._id }).populate({
+        path: "items.product",
+        populate: {
+          path: "shop",
+        },
+      })) || (await Cart.create({ user: req.user._id }));
     return res.status(200).json(cart);
   } catch (error) {
     return res.status(500).json({ error: error.message });

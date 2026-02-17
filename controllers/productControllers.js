@@ -34,7 +34,7 @@ const getProductById = async (req, res) => {
   try {
     const product = await Product.findById(req.params.productId)
       .populate("category", "name")
-      .populate("shop", "name");
+      .populate("shop", "name industry");
     if (!product) return res.status(404).json({ message: "Product not found" });
     return res.status(200).json(product);
   } catch (error) {
@@ -45,6 +45,10 @@ const getProductById = async (req, res) => {
 const createProduct = async (req, res) => {
   try {
     req.body.user = req.user._id;
+    const shop = await Shop.findById(req.body.shop);
+    if (!shop || !shop.user.equals(req.user._id)) {
+      return res.status(403).json({ error: "Permission denied" });
+    }
     const newProduct = new Product(req.body);
     const savedProduct = await newProduct.save();
     return res.status(201).json(savedProduct);
