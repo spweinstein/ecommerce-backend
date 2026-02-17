@@ -49,9 +49,9 @@ const updateShop = async (req, res) => {
     );
     if (!updatedShop)
       return res.status(404).json({ message: "Shop not found" });
-    res.status(200).json(updatedShop);
+    return res.status(200).json(updatedShop);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    return res.status(400).json({ message: error.message });
   }
 };
 const deleteShop = async (req, res) => {

@@ -28,7 +28,6 @@ export const getUserOrders = async (req, res) => {
 export const getShopOrders = async (req, res) => {
   try {
     const shop = await Shop.findById(req.params.shopId);
-    console.log(shop.user, req.user);
     if (!shop.user.equals(req.user._id))
       return res
         .status(403)
@@ -106,8 +105,6 @@ export const getShopOrderById = async (req, res) => {
     if (!shopOrder) {
       return res.status(404).json({ error: "Shop order not found" });
     }
-
-    // TODO: Add authorization check to ensure user owns this shop
 
     return res.status(200).json(shopOrder);
   } catch (error) {
