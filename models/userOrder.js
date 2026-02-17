@@ -1,5 +1,14 @@
 import mongoose from "mongoose";
 
+const addressSchema = new mongoose.Schema({
+  address1: String,
+  address2: String,
+  city: String,
+  region: String,
+  postalCode: String,
+  country: String,
+});
+
 const userOrderSchema = new mongoose.Schema(
   {
     user: {
@@ -14,6 +23,13 @@ const userOrderSchema = new mongoose.Schema(
         ref: "ShopOrder",
       },
     ],
+
+    shippingAddress: addressSchema,
+    billingAddress: addressSchema,
+    subtotal: Number,
+    shippingTotal: Number,
+    taxTotal: Number,
+    grandTotal: Number,
   },
   {
     timestamps: true,

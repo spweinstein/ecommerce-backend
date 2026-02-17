@@ -49,6 +49,12 @@ const shopOrderSchema = new mongoose.Schema(
       enum: ["pending", "processing", "shipped", "delivered", "cancelled"],
       default: "pending",
     },
+
+    shippingMethod: String,
+    shippingTotal: Number,
+    shippingSpeed: String,
+    taxTotal: Number,
+    grandTotal: Number,
   },
   { timestamps: true },
 );

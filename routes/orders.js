@@ -6,7 +6,7 @@ const ordersRouter = Router();
 // /POST/orders
 // Submit + clear cart
 // Save cart as new order
-ordersRouter.post("/", ordersControllers.submitOrder);
+// ordersRouter.post("/", ordersControllers.submitOrder);
 
 // GET /orders
 // Get all of a user's orders

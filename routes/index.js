@@ -7,6 +7,7 @@ import industriesRouter from "./industries.js";
 import productCategoriesRouter from "./productCategories.js";
 import cartRouter from "./cart.js";
 import ordersRouter from "./orders.js";
+import checkoutRouter from "./checkout.js";
 import verifyToken from "../middleware/verify-token.js";
 
 const router = Router();
@@ -19,5 +20,6 @@ router.use("/industries", industriesRouter);
 router.use("/productCategories", productCategoriesRouter);
 router.use("/cart", verifyToken, cartRouter);
 router.use("/orders", verifyToken, ordersRouter);
+router.use("/checkout", verifyToken, checkoutRouter);
 
 export default router;
